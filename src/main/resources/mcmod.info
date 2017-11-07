@@ -1,0 +1,16 @@
+[
+{
+  "modid": "instaplay",
+  "name": "InstaPlay for Hypixel",
+  "description": "Creates a GUI that allows you to join games instantly on Hypixel.",
+  "version": "1.0",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["JGSBroadcast"],
+  "credits": "JGSBroadcast",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
