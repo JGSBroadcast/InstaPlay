@@ -1,6 +1,7 @@
 package net.jgsb.instaplay.gui;
 
 import net.jgsb.instaplay.gui.skywars.GuiSkywarsLabs;
+import net.jgsb.instaplay.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
@@ -8,24 +9,31 @@ import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
 
+import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.FULL;
+import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.LEFT;
+import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.RIGHT;
+
 /**
  * Created by Jacob on 10/12/2017.
  */
-public class GuiSkywars extends GuiScreen {
+public class GuiSkywars extends GuiGame {
 
     EntityPlayerSP p = Minecraft.getMinecraft().thePlayer;
 
     @Override
     public void initGui() {
-        int x = this.width / 2 - 75;
-        int y = this.height / 2 - 10;
-        buttonList.add(new GuiButton(0, x - 95, y - 36, 150, 20, "Solo Normal"));
-        buttonList.add(new GuiButton(1, x + 95, y - 36, 150, 20, "Solo Insane"));
-        buttonList.add(new GuiButton(2, x - 95, y - 12, 150, 20, "Teams Normal"));
-        buttonList.add(new GuiButton(3, x + 95, y - 12, 150, 20, "Teams Insane"));
-        buttonList.add(new GuiButton(4, x - 95, y + 12, 150, 20, "Ranked Normal"));
-        buttonList.add(new GuiButton(5, x + 95, y + 12, 150, 20, "Mega Normal"));
-        buttonList.add(new GuiButton(6, x - 95, y + 36, 340, 20, "Laboratories"));
+        buttonList.add(GuiUtils.createButton(this, LEFT, 0, -2, "Solo Normal"));
+        buttonList.add(GuiUtils.createButton(this, RIGHT, 1, -2, "Solo Insane"));
+
+        buttonList.add(GuiUtils.createButton(this, LEFT, 2, -1, "Teams Normal"));
+        buttonList.add(GuiUtils.createButton(this, RIGHT, 3, -1, "Teams Insane"));
+
+        buttonList.add(GuiUtils.createButton(this, LEFT, 4, 0, "Ranked"));
+        buttonList.add(GuiUtils.createButton(this, RIGHT, 5, 0, "Mega"));
+
+        buttonList.add(GuiUtils.createButton(this, FULL, 6, 1, "Laboratories"));
+
+        buttonList.add(GuiUtils.createButton(this, FULL, 7, 2, "Go to Lobby"));
         super.initGui();
     }
 
@@ -44,13 +52,17 @@ public class GuiSkywars extends GuiScreen {
         } else if(button.id == 5) {
             p.sendChatMessage("/play mega_normal");
         } else if(button.id == 6) {
-            Minecraft.getMinecraft().displayGuiScreen(new GuiSkywarsLabs());
+            mc.displayGuiScreen(new GuiSkywarsLabs());
+        } else if(button.id == 7) {
+            p.sendChatMessage("/lobby skywars");
+        } else if(button.id == 100) {
+            mc.displayGuiScreen(returnScreen);
         }
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawCenteredString(mc.fontRendererObj, "Skywars", this.width / 2, this.height / 2 - 66, 16777215);
+        this.drawCenteredString(mc.fontRendererObj, "Skywars", this.width / 2, GuiUtils.getPos(this, -3), 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

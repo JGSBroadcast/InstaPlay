@@ -8,14 +8,12 @@ import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
 
-import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.FULL;
-import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.LEFT;
-import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.RIGHT;
+import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.*;
 
 /**
  * Created by Jacob on 10/12/2017.
  */
-public class GuiBlitzSG extends GuiGame {
+public class GuiBuildBattle extends GuiGame {
 
     EntityPlayerSP p = Minecraft.getMinecraft().thePlayer;
 
@@ -24,22 +22,25 @@ public class GuiBlitzSG extends GuiGame {
         buttonList.add(GuiUtils.createButton(this, LEFT, 0, -1, "Solo"));
         buttonList.add(GuiUtils.createButton(this, RIGHT, 1, -1, "Teams"));
 
-        buttonList.add(GuiUtils.createButton(this, FULL, 2, 0, "Solo No Kits"));
+        buttonList.add(GuiUtils.createButton(this, LEFT, 2, 0, "Pro"));
+        buttonList.add(GuiUtils.createButton(this, RIGHT, 3, 0, "Guess the Build"));
 
-        buttonList.add(GuiUtils.createButton(this, FULL, 3, 1, "Go to Lobby"));
+        buttonList.add(GuiUtils.createButton(this, FULL, 4, 1, "Go to Lobby"));
         super.initGui();
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0) {
-            p.sendChatMessage("/play blitz_solo_normal");
+            p.sendChatMessage("/play build_battle_solo_normal");
         } else if(button.id == 1) {
-            p.sendChatMessage("/play blitz_teams_normal");
+            p.sendChatMessage("/play build_battle_teams_normal");
         } else if(button.id == 2) {
-            p.sendChatMessage("/play blitz_solo_nokits");
+            p.sendChatMessage("/play build_battle_solo_pro");
+        } else if(button.id == 3) {
+            p.sendChatMessage("/play build_battle_guess_the_build");
         } else if(button.id == 4) {
-            p.sendChatMessage("/lobby blitz");
+            p.sendChatMessage("/lobby build");
         } else if(button.id == 100) {
             mc.displayGuiScreen(returnScreen);
         }
@@ -47,7 +48,7 @@ public class GuiBlitzSG extends GuiGame {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawCenteredString(mc.fontRendererObj, "Blitz SG", this.width / 2, GuiUtils.getPos(this, -2), 16777215);
+        this.drawCenteredString(mc.fontRendererObj, "Build Battle", this.width / 2, GuiUtils.getPos(this, -2), 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

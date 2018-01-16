@@ -1,5 +1,6 @@
 package net.jgsb.instaplay.gui;
 
+import net.jgsb.instaplay.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
@@ -7,34 +8,37 @@ import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
 
+import static net.jgsb.instaplay.utils.GuiUtils.ButtonType.*;
+
 /**
  * Created by Jacob on 10/12/2017.
  */
-public class GuiQuakecraft extends GuiScreen {
+public class GuiCopsAndCrims extends GuiGame {
 
     EntityPlayerSP p = Minecraft.getMinecraft().thePlayer;
 
     @Override
     public void initGui() {
-        int x = this.width / 2 - 75;
-        int y = this.height / 2 - 10;
-        buttonList.add(new GuiButton(0, x - 95, y, 150, 20, "Solo"));
-        buttonList.add(new GuiButton(1, x + 95, y, 150, 20, "Teams"));
+        buttonList.add(GuiUtils.createButton(this, FULL, 0, -0.5, "Play"));
+
+        buttonList.add(GuiUtils.createButton(this, FULL, 1, 0.5, "Go to Lobby"));
         super.initGui();
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0) {
-            p.sendChatMessage("/play quake_solo");
+            p.sendChatMessage("/play cvc");
         } else if(button.id == 1) {
-            p.sendChatMessage("/play quake_teams");
+            p.sendChatMessage("/lobby cvc");
+        } else if(button.id == 100) {
+            mc.displayGuiScreen(returnScreen);
         }
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawCenteredString(mc.fontRendererObj, "Quakecraft", this.width / 2, this.height / 2 - 32, 16777215);
+        this.drawCenteredString(mc.fontRendererObj, "Cops and Crims", this.width / 2, GuiUtils.getPos(this, -1.5), 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
