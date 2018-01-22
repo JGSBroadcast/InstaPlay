@@ -30,7 +30,7 @@ public class GuiHideAndSeek extends GuiGame {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0) {
-            p.sendChatMessage("prototype_hide_and_seek_prop_hunt");
+            p.sendChatMessage("/play prototype_hide_and_seek_prop_hunt");
         } else if(button.id == 1) {
             p.sendChatMessage("/play prototype_hide_and_seek_party_pooper");
         } else if(button.id == 100) {
